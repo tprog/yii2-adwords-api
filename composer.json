@@ -1,0 +1,22 @@
+{
+    "name": "tprog/yii2-adwords-api",
+    "description": "Extension for use API ADWords",
+    "type": "yii2-extension",
+    "keywords": ["yii2","adwords","api"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Artem Bondarenko",
+            "email": "taxist@ua.fm"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*",
+	"googleads/googleads-php-lib": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "tprog\\adwordsapi\\": ""
+        }
+    }
+}
