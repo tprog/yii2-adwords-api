@@ -1,6 +1,6 @@
 <?php
 
-namespace tprog;
+namespace tprog\adwordsapi;
 
 use yii\base\Component;
 
