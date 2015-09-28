@@ -22,10 +22,60 @@ or add
 to the require section of your `composer.json` file.
 
 
+Configuration
+-------------
+```
+    'components' => [
+    ...
+        'ADwords'   => [
+            'class'            => 'tprog\adwordsapi\ADwords',
+            'developerToken'   => '***************',
+            'server_version'   => 'v201506',
+            'userAgent'        => 'You Adwords API client',
+            'clientCustomerId' => '***-***-****',
+            'client'           => [
+                'client_id'     => '***************',
+                'client_secret' => '***************',
+                'refresh_token'    => '***************',
+            ],
+        ],
+    ...
+```
+
+
 Usage
 -----
 
-Once the extension is installed, simply use it in your code by  :
+Example create new account  :
 
 ```php
-<?= \tprog\adwordsapi\AutoloadExample::widget(); ?>```
+
+        $ADwordsUser = Yii::$app->ADwords->user;
+
+        // Get the service, which loads the required classes.
+        $managedCustomerService =
+            $ADwordsUser->GetService('ManagedCustomerService');
+
+        // Create customer.
+        $customer = new \ManagedCustomer();
+        $customer->name = 'Account #' . uniqid();
+        $customer->currencyCode = 'EUR';
+        $customer->dateTimeZone = 'Europe/London';
+
+        // Create operation.
+        $operation = new \ManagedCustomerOperation();
+        $operation->operator = 'ADD';
+        $operation->operand = $customer;
+
+        $operations = [$operation];
+
+        // Make the mutate request.
+        $result = $managedCustomerService->mutate($operations);
+
+        // Display result.
+        $customer = $result->value[0];
+        printf("Account with customer ID '%s' was created.\n",
+            $customer->customerId);
+
+
+```
